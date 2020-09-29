@@ -31,3 +31,5 @@ This will:
 
 * I opted not to use Cucumber / Behave on this challenge, because the particular challenge design doesn't really lend itself well to being mapped out behaviorally.
 
+* I used a comparator assertion, rather than a T/F assertion, because it makes the test output more easy to debug on test failure. The comparison failure is explicitly shown in the verbose test output.
+

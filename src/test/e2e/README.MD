@@ -5,10 +5,11 @@ cd src/test/e2e
 ./run_tests.sh
 ```
 
-Assumptions:
-    Your environment already has:
-        > Python 3 (3.6.x or better)
-        > Docker
+Assumptions: Your test execution environment already has:
+
+* Python 3 (3.6.x or better)
+* Docker
+* Any Recent Version of Chrome
 
 This will:
 
@@ -27,3 +28,6 @@ This will:
 * I briefly attempted to inspect the javascript, to see if I could fix this myself, but it looks as though the app is supposed to be connecting to some AWS backend when it starts up, and is supposed to use that to validate answers. That seems beyond the scope of this challenge. So, I'm letting the test fail.
 
 * I used an explicit WebdriverWait twice. Once, to insure that the automation would wait long enough for the scroll. However, this wait was technically not necessary. Since the entire DOM is visible to the driver, I could have proceeded to collect the table data while the scroll was taking place. I waited anyway, to conform to the implicit rules of the challenge. The second webDriverWait was put before the response popup on the submit button. Here, a wait makes more sense, but still, the responsiveness of the app is such that a wait here is almost not needed.
+
+* I opted not to use Cucumber / Behave on this challenge, because the particular challenge design doesn't really lend itself well to being mapped out behaviorally.
+

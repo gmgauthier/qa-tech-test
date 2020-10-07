@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+group 'demo'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    compile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.2'
+    compile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.6.2'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.2.2'
+    testCompile group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+    testImplementation 'io.cucumber:cucumber-java:6.7.0'
+    testImplementation 'io.cucumber:cucumber-junit:6.7.0'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources/']
+        }
+    }
+}
+

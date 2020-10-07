@@ -20,5 +20,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Test for Greg Gauthier
 **/__pycache__
 **/.pytest_cache
+**/.gradle
+**/build
+

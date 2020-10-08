@@ -41,8 +41,6 @@ In this iteration of the challenge, I decided to add the cucumber layer, since f
 
 The background stage insures that the webdriver fires up properly, and that the browser is directed toward the react app url. The background stage will throw a test failure (NOT an exception) if the browser tab title is not "React App" after navigation. This insures that basic navigation is successful, and nothing more. Contents of the page will be tested later.
 
-If the testing requirements were broader, I might also have broken out the initialization of the driver object into a separate class as well, in order to handle things like browser specification at runtime, or parallel testing, or virtual environment, implementations.
-
 The scenario I implemented intentionally avoids all use of specific detail (such as doing tabular data comparisons or partition algorithm checks). This is because, under normal conditions, I would have expected this data to change (in other words, having it given by a backend api). In other words, in the ideal situation, you shouldn't be able to predict the correct solutions to each of the three rows.
 
 There is only one scenario, because I count clicking on the "Render The Challenge" button as part of the functionality of the GIVEN step. The WHEN step relies on functional responses (i.e. exceptions) for feedback, and the THEN step finally does an explicit pass/fail check.
@@ -51,7 +49,7 @@ You could potentially split this into two scenarios: one to test the "render" bu
 
 I used two different variants of Gherkin assertion in this test. First, in the Background, I used normative ("should") language for the assertion. Then, in the test itself, I used state ("is") language. This was by design to show that I am aware of the difference. But there is an argument to be made that the state language is more appropriate (if you think of gherkin scenarios as state tables).
 
-I took the opportunity in the rewrite, to modularize the test a bit more than the python one, as well. You'll notice that I've moved a few new things out into "helper" methods.
+I took the opportunity in the rewrite, to modularize the test a bit more than the python one, as well. You'll notice that I've moved a few new things out into "helper" methods. If the testing requirements were broader, I might also have broken out the initialization of the driver object into a separate class as well, in order to handle things like browser specification at runtime, or parallel testing, or virtual environment, implementations.
 
 As before, I have chosen not to break out the locator strings into separate static variables, or "page objects", because the test suite is just too small to warrant it, and because I've implemented a few additional optimizations to the element search strings to minimize the brittleness. For example, the submit button in python looks like this: `"//*[@id='challenge']/div/div/div[2]/div/div[2]/button"` but in the java project looks like this: `"//*[text()='Submit Answers']"`, completely eliminating all explicit DOM hierarchy references.
 
